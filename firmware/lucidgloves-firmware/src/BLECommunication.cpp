@@ -11,9 +11,7 @@ BLECommunication::BLECommunication() :
     m_isOpen(false), 
     m_tx(BLE_TX_UUID, BLERead | BLENotify, 75),
     m_rx(BLE_RX_UUID, BLEWrite | BLEWriteWithoutResponse, 75),
-    m_serial(BLE_SERVICE_UUID) {
-    m_isOpen = false;
-}
+    m_serial(BLE_SERVICE_UUID) {}
 
 bool BLECommunication::isOpen(){
   return m_isOpen;
@@ -50,7 +48,7 @@ bool BLECommunication::readData(char* input){
   if (input == NULL) {
     return false;
   }
-  strcpy(input, m_rx.value());
+  strcpy(input, reinterpret_cast<const char*>(m_rx.value()));
   return strlen(input) > 0;
 }
 
