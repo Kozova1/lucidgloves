@@ -36,6 +36,8 @@ void BLECommunication::start(){
   int initialFlexion[5] = { 0 };
   m_tx.writeValue(encode(initialFlexion, 0, 0, false, false, false, false, false, false, false, false));
 
+  BLE.advertise();
+
   Serial.println("The device started, now you can pair it with bluetooth!");
   m_isOpen = true;
 }
@@ -45,7 +47,11 @@ void BLECommunication::output(char* data){
 }
 
 bool BLECommunication::readData(char* input){
-  return m_rx.value();
+  if (input == NULL) {
+    return false;
+  }
+  strcpy(input, m_rx.value());
+  return strlen(input) > 0;
 }
 
 #endif
