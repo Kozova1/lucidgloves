@@ -12,6 +12,8 @@
   #include "SerialCommunication.h"
 #elif COMMUNICATION == COMM_BTSERIAL
   #include "BTSerialCommunication.h"
+#elif COMMUNICATION == COMM_BLE
+  #include "BLECommunication.h"
 #endif
 
 
@@ -25,10 +27,13 @@
 ICommunication* comm;
 int loops = 0;
 void setup() {
+  delay(5000);
   #if COMMUNICATION == COMM_SERIAL
     comm = new SerialCommunication();
   #elif COMMUNICATION == COMM_BTSERIAL
     comm = new BTSerialCommunication();
+  #elif COMMUNICATION == COMM_BLE
+    comm = new BLECommunication();
   #endif  
   comm->start();
 
@@ -37,11 +42,18 @@ void setup() {
   #if USING_FORCE_FEEDBACK
     setupServoHaptics();  
   #endif
-  
 }
 
 void loop() {
   if (comm->isOpen()){
+    #if COMMUNICATION == COMM_BLE
+      BLE.poll();
+    #endif
+      BLEDevice central = BLE.central();
+      if (central) {
+        Serial.print("Connected to central: ");
+        Serial.println(central.address());
+      }
     #if USING_CALIB_PIN
     bool calibButton = getButton(PIN_CALIB) != INVERT_CALIB;
     if (calibButton)

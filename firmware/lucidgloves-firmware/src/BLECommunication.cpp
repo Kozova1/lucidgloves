@@ -24,6 +24,7 @@ void BLECommunication::start(){
     Serial.println("starting BLE failed!");
     while (1);
   }
+  Serial.println("BLE started!");
 
   BLE.setLocalName(BTSERIAL_DEVICE_NAME);
   BLE.setAdvertisedService(m_serial);
