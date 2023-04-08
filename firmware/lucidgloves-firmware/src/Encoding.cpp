@@ -14,6 +14,8 @@ struct outputData{
   int* hapticLimits;
 };
 */
+#include "Arduino.h"
+#include "Encoding.h"
 
 #if ENCODING == ENCODING_LEGACY
 //legacy encoding
@@ -38,9 +40,7 @@ void decodeData(char* stringToDecode, int* hapticLimits){
         ptr = strtok(NULL, "&");  // takes a list of delimiters
     }
 }
-#endif
-
-#if ENCODING == ENCODE_ALPHA
+#elif ENCODING == ENCODE_ALPHA
 //alphabetic encoding
 char* encode(int* flexion, int joyX, int joyY, bool joyClick, bool triggerButton, bool aButton, bool bButton, bool grab, bool pinch, bool calib, bool menu){
   static char stringToEncode[75];
@@ -63,7 +63,7 @@ void decodeData(char* stringToDecode, int* hapticLimits){
   //Serial.println("Haptic: "+ (String)hapticLimits[0] + " " + (String)hapticLimits[1] + " " + (String)hapticLimits[2] + " " + (String)hapticLimits[3] + " " + (String)hapticLimits[4] + " ");
 }
 
-int getArgument(char* stringToDecode, char command){
+static int getArgument(char* stringToDecode, char command){
   char* start = strchr(stringToDecode, command);
   if (start == NULL)
     return -1;

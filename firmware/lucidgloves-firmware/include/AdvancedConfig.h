@@ -1,4 +1,5 @@
 //Advanced settings, only for the pros XD
+#pragma once
 
 #define LOOP_TIME 4 //How much time between data sends (ms), set to 0 for a good time :)
 #define CALIBRATION_LOOPS -1//How many loops should be calibrated. Set to -1 to always be calibrated.

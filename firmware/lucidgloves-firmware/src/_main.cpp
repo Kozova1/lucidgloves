@@ -1,3 +1,20 @@
+#include "ICommunication.h"
+
+#include "lucidgloves-firmware.h"
+
+#include "Encoding.h"
+#include "input.h"
+#include "gesture.h"
+#if defined(USING_FORCE_FEEDBACK)
+  #include "haptics.h"
+#endif
+#if COMMUNICATION == COMM_SERIAL
+  #include "SerialCommunication.h"
+#elif COMMUNICATION == COMM_BTSERIAL
+  #include "BTSerialCommunication.h"
+#endif
+
+
 #define ALWAYS_CALIBRATING CALIBRATION_LOOPS == -1
 
 #define CALIB_OVERRIDE false

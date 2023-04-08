@@ -1,10 +1,13 @@
-#if USING_FORCE_FEEDBACK
+#include "Arduino.h"
 
+#include "lucidgloves-firmware.h"
 #if defined(ESP32)
   #include "ESP32Servo.h"
 #else
   #include "Servo.h"
 #endif
+
+#include "haptics.h"
 
 Servo pinkyServo;
 Servo ringServo;
@@ -50,5 +53,3 @@ void writeServoHaptics(int* hapticLimits){
   if(hapticLimits[3] >= 0) ringServo.write(scaledLimits[3]);
   if(hapticLimits[4] >= 0) pinkyServo.write(scaledLimits[4]);
 }
-
-#endif

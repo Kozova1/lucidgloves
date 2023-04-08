@@ -3,6 +3,7 @@
  * Author: Lucas_VRTech - LucidVR
  * lucidvrtech.com
  */
+#pragma once
 
 #include "AdvancedConfig.h"
 

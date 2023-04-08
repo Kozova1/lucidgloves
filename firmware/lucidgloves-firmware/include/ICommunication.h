@@ -1,4 +1,5 @@
 //Interface for communication
+#pragma once
 
 class ICommunication {
 

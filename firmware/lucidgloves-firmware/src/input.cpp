@@ -1,4 +1,9 @@
 // Requires RunningMedian library by Rob Tillaart
+#include "Arduino.h"
+
+#include "lucidgloves-firmware.h"
+#include "input.h"
+
 #if ENABLE_MEDIAN_FILTER
   #include <RunningMedian.h>
   RunningMedian rmSamples[5] = {
